@@ -206,11 +206,7 @@ def generate_content(client, topic: str, title: str, field: str, platform: str) 
 def parse_image_prompts(meta_md: str) -> dict:
     """Extract DALL-E prompts from meta.md content."""
     prompts = {}
-    dalle_section = re.search(r"## DALL-E.*?(?=\n## |\Z)", meta_md, re.DOTALL | re.IGNORECASE)
-    if not dalle_section:
-        return prompts
-
-    blocks = re.split(r"### ", dalle_section.group())
+    blocks = re.split(r"###\s+", meta_md)
     for block in blocks:
         block = block.strip()
         if not block:
@@ -223,17 +219,16 @@ def parse_image_prompts(meta_md: str) -> dict:
 
         if "thumbnail" in header:
             prompts["thumbnail.png"] = prompt_text
-        elif "image_1" in header or ("1" in header.split("(")[0] and "image" not in header.split("(")[0]):
+        elif "image_1" in header or ("1" in header and ("png" in header or "섹션" in header or "section" in header)):
             prompts["image_1.png"] = prompt_text
-        elif "image_2" in header:
+        elif "image_2" in header or ("2" in header and ("png" in header or "섹션" in header or "section" in header)):
             prompts["image_2.png"] = prompt_text
-        elif "image_3" in header:
+        elif "image_3" in header or ("3" in header and ("png" in header or "섹션" in header or "section" in header)):
             prompts["image_3.png"] = prompt_text
-        elif "image_4" in header:
+        elif "image_4" in header or ("4" in header and ("png" in header or "섹션" in header or "section" in header)):
             prompts["image_4.png"] = prompt_text
 
     return prompts
-
 
 def generate_single_image(client, prompt: str) -> bytes:
     """Generate a single image using gpt-image-2."""
