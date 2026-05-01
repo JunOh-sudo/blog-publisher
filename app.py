@@ -238,7 +238,7 @@ def parse_image_prompts(meta_md: str) -> dict:
 def generate_single_image(client, prompt: str) -> bytes:
     """Generate a single image using gpt-image-2."""
     result = client.images.generate(
-        model="gpt-image-2",
+        model="gpt-image-1",
         prompt=prompt,
         size="1024x1024",
         quality="high",
@@ -486,7 +486,7 @@ elif st.session_state["step"] == 4:
             st.success(f"✅ {len(images)}개 이미지 생성 완료")
 
             # Display images in grid
-            cols = st.columns(min(len(images), 3))
+            cols = st.columns(min(len(images), 3)) if len(images) > 0 else []
             for idx, (name, data) in enumerate(images.items()):
                 with cols[idx % 3]:
                     st.image(data, caption=name, use_container_width=True)
