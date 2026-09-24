@@ -24,3 +24,23 @@
 | IMAGE_2 | rehab-before-filing-checklist.png | 정보(체크리스트) |
 | IMAGE_3 | rehab-before-filing-illust-2.png | 삽화 |
 | IMAGE_4 | rehab-before-filing-steps.png | 정보(절차) |
+
+## 대체텍스트
+| 파일 | 대체텍스트 |
+|---|---|
+| rehab-before-filing-thumbnail.png | 개인회생 신청 전 반드시 멈춰야 할 행동 5가지를 다룬 글의 대표 이미지, 부제 "가족 빚, 먼저 갚아도 될까요?" |
+| rehab-before-filing-illust-1.png | 책상 위에 정리 중인 서류와 체크 표시 메모, 화분과 머그컵이 놓인 삽화로, 개인회생 신청 전 상황을 차분히 정리하는 장면 |
+| rehab-before-filing-checklist.png | 개인회생 신청 전 멈춰야 할 행동 5가지 체크리스트: 특정 채권자에게만 먼저 갚기, 재산 명의 이전·헐값 처분, 큰 현금 인출·가족 송금, 신청 직전 새 대출·돌려막기, 새 투자·도박 |
+| rehab-before-filing-illust-2.png | 아침 햇살이 드는 창가에 김이 오르는 차 한 잔과 화분이 놓인 삽화로, 개인회생 준비 중 잠시 숨을 고르는 장면 |
+| rehab-before-filing-steps.png | 개인회생 신청 전 확인 순서 4단계: 자격 확인, 이미 한 변제·이체를 신청서에 적고 자료 준비, 필요하면 중지·금지명령 신청(법원이 명령을 내려야 효력), 개시결정 이후 강제집행 등 중지·금지 |
+
+삽화 캡션(선택): IMAGE_1 "서두르기 전에, 무엇을 멈춰야 하는지부터 볼까요?" / IMAGE_3 "잠시 숨을 고르고, 남은 두 가지를 마저 볼게요."
+(AI 삽화로 교체 시 대체텍스트는 visual_plan.md의 AI판 문구 사용)
+
+## AI 삽화 프롬프트 (app.py 4단계용, 정보 이미지 자리는 렌더 파일 사용)
+
+### image_1.png
+Seen from behind, a person sits at a kitchen table and gently pauses, hands resting beside a neat stack of unopened bills and a bankbook, a warm cup of tea and a small potted plant beside them, accent color deep green (#2F6B52), warm flat editorial illustration, soft grain texture, muted navy (#1F3A5F) and slate palette with one gentle accent color, soft paper background, rounded simple shapes, generous negative space, soft morning light, calm and hopeful mood, people shown only from behind or as hands or silhouettes, No text, no letters, no numbers, no logos, no flags, no recognizable faces
+
+### image_3.png
+Seen from behind, a person stretches gently by a sunlit window in the early morning, a closed, tidy household ledger resting on the windowsill next to a small potted plant, accent color deep green (#2F6B52), warm flat editorial illustration, soft grain texture, muted navy (#1F3A5F) and slate palette with one gentle accent color, soft paper background, rounded simple shapes, generous negative space, soft morning light, calm and hopeful mood, people shown only from behind or as hands or silhouettes, No text, no letters, no numbers, no logos, no flags, no recognizable faces

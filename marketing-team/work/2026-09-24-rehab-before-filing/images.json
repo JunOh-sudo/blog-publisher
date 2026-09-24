@@ -1,0 +1,90 @@
+{
+ "_note": "T006 네이버 · P3 · 문구는 naver.md 표현 범위 안(변호사 검수 전) · checklist note는 5항목과 함께 넣으면 하단 바에 가려져 제거",
+ "images": [
+  {
+   "template": "thumbnail",
+   "file": "rehab-before-filing-thumbnail.png",
+   "data": {
+    "pillar": "P3",
+    "tag": "개인회생",
+    "title": "개인회생 신청 전\n반드시 멈춰야 할\n행동 5가지",
+    "subtitle": "가족 빚, 먼저 갚아도 될까요?",
+    "date": "2026.09"
+   }
+  },
+  {
+   "template": "illustration",
+   "file": "rehab-before-filing-illust-1.png",
+   "data": {
+    "pillar": "P3",
+    "scene": "desk"
+   }
+  },
+  {
+   "template": "checklist",
+   "file": "rehab-before-filing-checklist.png",
+   "data": {
+    "pillar": "P3",
+    "tag": "체크리스트",
+    "title": "신청 전, 잠시 멈출 행동 5가지",
+    "items": [
+     {
+      "head": "특정 채권자에게만 먼저 갚기",
+      "body": "가족·지인에게 빌린 돈도 포함돼요"
+     },
+     {
+      "head": "재산 명의 이전·헐값 처분",
+      "body": "차·부동산·보증금은 그대로 두세요"
+     },
+     {
+      "head": "큰 현금 인출·가족 송금",
+      "body": "쓴 곳의 영수증·메모를 모아 두세요"
+     },
+     {
+      "head": "신청 직전 새 대출·돌려막기",
+      "body": "현금서비스도 여기에 해당해요"
+     },
+     {
+      "head": "새 투자·도박",
+      "body": "주식·코인 신규 투자도 멈추세요"
+     }
+    ]
+   }
+  },
+  {
+   "template": "illustration",
+   "file": "rehab-before-filing-illust-2.png",
+   "data": {
+    "pillar": "P3",
+    "scene": "calm"
+   }
+  },
+  {
+   "template": "steps",
+   "file": "rehab-before-filing-steps.png",
+   "data": {
+    "pillar": "P3",
+    "tag": "대신 이렇게 하세요",
+    "title": "신청 전 확인 순서",
+    "steps": [
+     {
+      "head": "자격부터 확인하기",
+      "body": "채무 한도와 소득 요건을 먼저 봅니다"
+     },
+     {
+      "head": "이미 한 일은 그대로 적기",
+      "body": "변제·이체는 신청서에 적고 자료 준비"
+     },
+     {
+      "head": "필요하면 중지·금지명령 신청",
+      "body": "법원이 명령을 내려야 효력이 생겨요"
+     },
+     {
+      "head": "개시결정 이후",
+      "body": "강제집행 등이 중지·금지됩니다"
+     }
+    ]
+   }
+  }
+ ]
+}
