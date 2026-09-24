@@ -30,4 +30,5 @@
 1. **기준선 측정**: 네이버 블로그 통계·티스토리 통계·Search Console에서 최근 3개월 데이터를 내보내 `data/`에 넣기
 2. **추적 설정**: 상담 링크 UTM, 상담 접수 시 “어떻게 알고 오셨나요?” 질문 → `data/leads.csv`
 3. `/blog-plan` → 주제 승인 → `/blog-write <주제> both`
-4. 공개 전환 당일 `/blog-index`, 금요일 `/blog-report`, 월말 `/blog-refresh`
+4. 변호사 PC의 Claude Code(Claude in Chrome)에서 `/blog-publish <패키지>` → 비공개 저장 → 변호사 검수·공개
+5. 공개 전환 당일 `/blog-index`, 금요일 `/blog-report`, 월말 `/blog-refresh`

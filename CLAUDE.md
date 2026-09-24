@@ -4,7 +4,7 @@
 
 - `app.py`: Streamlit 제작 엔진 (제목 → 본문 → 이미지 → Supabase 업로드). `streamlit run app.py`
 - `marketing-team/`: 전략 문서, 주제 백로그, 성과 데이터, 리포트
-- `.claude/agents/`: 에이전트 팀 9명, `.claude/commands/`: `/blog-plan`, `/blog-write`, `/blog-index`, `/blog-report`, `/blog-refresh`
+- `.claude/agents/`: 에이전트 팀 9명, `.claude/commands/`: `/blog-plan`, `/blog-write`, `/blog-publish`, `/blog-index`, `/blog-report`, `/blog-refresh`
 
 ## 팀 운영 원칙 (편집장 = 메인 세션)
 1. 기획 → 팩트시트 → 원고 → 이미지(visual-designer) → 검수 → 변호사 승인 → 비공개 발행 → 공개(변호사) → 색인 등록(publisher) → 측정 → 사후관리.

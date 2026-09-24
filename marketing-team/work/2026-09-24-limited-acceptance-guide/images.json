@@ -1,0 +1,64 @@
+{
+ "_note": "T005 티스토리 · P1 · 문구는 tistory/post.html 비교표(2절)·절차표(6절) 범위 안(변호사 검수 전) · 기간 숫자는 3개월·5일·2개월만 사용 · compare 라벨은 1차 렌더에서 두 줄로 꺾여 짧게 줄여 재렌더(다음 순위 가족→다음 순위, 3개월 안에 안 하면→기간 넘기면)",
+ "images": [
+  {
+   "template": "thumbnail",
+   "file": "limited-acceptance-thumbnail.png",
+   "data": {
+    "pillar": "P1",
+    "tag": "상속 채무",
+    "title": "한정승인\n절차·비용·기간\n가이드",
+    "subtitle": "재산목록 작성법까지 정리했습니다",
+    "date": "2026.09"
+   }
+  },
+  {
+   "template": "illustration",
+   "file": "limited-acceptance-illust-1.png",
+   "data": {"pillar": "P1", "scene": "desk"}
+  },
+  {
+   "template": "compare",
+   "file": "limited-acceptance-compare.png",
+   "data": {
+    "pillar": "P1",
+    "tag": "한눈에 비교",
+    "title": "한정승인과 상속포기, 어디서 갈리나",
+    "left": "한정승인",
+    "right": "상속포기",
+    "rows": [
+     {"label": "한 줄 정의", "left": "물려받은 재산 범위 안에서만 빚을 갚음", "right": "처음부터 상속인이 아니었던 것이 됨"},
+     {"label": "상속인 자리", "left": "그대로 유지", "right": "없어짐"},
+     {"label": "다음 순위", "left": "빚이 넘어가는 문제를 줄일 수 있음", "right": "다음 순위가 상속인이 될 수 있음"},
+     {"label": "기간 넘기면", "left": "단순승인한 것으로 봄", "right": "단순승인한 것으로 봄"}
+    ]
+   }
+  },
+  {
+   "template": "illustration",
+   "file": "limited-acceptance-illust-2.png",
+   "data": {"pillar": "P1", "scene": "path"}
+  },
+  {
+   "template": "steps",
+   "file": "limited-acceptance-steps.png",
+   "data": {
+    "pillar": "P1",
+    "tag": "신고 절차",
+    "title": "한정승인, 이 순서로 진행돼요",
+    "steps": [
+     {"head": "재산과 빚 조회", "body": "안심상속 조회 + 조회 안 되는 빚 확인"},
+     {"head": "신고서·재산목록 제출", "body": "상속이 시작된 것을 안 날부터 3개월 안"},
+     {"head": "법원 결정 기다리기", "body": "결정 전 상속재산 처분 금지"},
+     {"head": "채권자 공고·개별 통지", "body": "한정승인을 한 뒤 5일 안, 신고 기간 2개월 이상"},
+     {"head": "상속재산으로 나눠 갚기", "body": "우선권 있는 채권자 먼저, 나머지는 비율대로"}
+    ]
+   }
+  },
+  {
+   "template": "illustration",
+   "file": "limited-acceptance-illust-3.png",
+   "data": {"pillar": "P1", "scene": "calm"}
+  }
+ ]
+}

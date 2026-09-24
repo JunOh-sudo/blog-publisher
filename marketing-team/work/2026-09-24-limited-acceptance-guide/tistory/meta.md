@@ -51,28 +51,25 @@
 | {{IMAGE_4}} | 6절 절차표 아래 | 정보(steps) | 절차표 6단계를 5단계로 압축(기간 연장은 선택 단계) |
 | {{IMAGE_5}} | 7절 끝, FAQ 앞 | 삽화 (h2 8개라 추가) | 달력에 표시한 날짜, 차 한 잔, 정리된 서류철 |
 
-> 주의: app.py `replace_placeholders()`는 IMAGE_1~4만 치환합니다. {{IMAGE_5}}는 수동 교체하거나 app.py 수정이 필요합니다.
-> 주의: app.py `parse_image_prompts()`는 아래 `###` 블록 본문을 프롬프트로 읽습니다. visual-designer가 채우기 전에 app.py 4단계를 돌리면 "visual-designer가 채움" 문구가 프롬프트로 들어가니 실행하지 마세요.
+> (갱신 2026.09.24 visual-designer) 현재 app.py `MAX_IMAGE_SLOTS = 6`이라 `replace_placeholders()`가 {{IMAGE_5}}까지 치환합니다. post.html 311행 주석의 'IMAGE_1~4만 치환' 문구는 옛 내용입니다.
+> 주의: app.py `parse_image_prompts()`는 아래 `###` 블록 본문을 프롬프트로 읽습니다. 아래 '이미지 프롬프트' 절이 채워져 image_1·3·5 세 개만 프롬프트로 인식됩니다(파서로 확인).
 
-## 이미지 프롬프트
+## 이미지 제작 안내 (visual-designer, 2026.09.24)
 
-### thumbnail
-(visual-designer가 채움)
+상세: `../visual_plan.md` · 렌더 파일: `../images/` · 원본 spec: `../images.json`
 
-### image_1
-(visual-designer가 채움)
+| 자리 | 파일 | 방식 |
+|---|---|---|
+| 대표 | limited-acceptance-thumbnail.png | 로컬 렌더 사용 (thumbnail 템플릿) |
+| {{IMAGE_1}} | AI(image_1.png) / 대체 limited-acceptance-illust-1.png | AI 삽화 기본, 대체는 illustration desk |
+| {{IMAGE_2}} | limited-acceptance-compare.png | 정보 이미지 로컬 렌더 사용 — AI 생성 안 함 |
+| {{IMAGE_3}} | AI(image_3.png) / 대체 limited-acceptance-illust-2.png | AI 삽화 기본, 대체는 illustration path |
+| {{IMAGE_4}} | limited-acceptance-steps.png | 정보 이미지 로컬 렌더 사용 — AI 생성 안 함 |
+| {{IMAGE_5}} | AI(image_5.png) / 대체 limited-acceptance-illust-3.png | AI 삽화 기본, 대체는 illustration calm |
 
-### image_2
-(visual-designer가 채움)
-
-### image_3
-(visual-designer가 채움)
-
-### image_4
-(visual-designer가 채움)
-
-### image_5
-(visual-designer가 채움)
+> image_2, image_4는 app.py가 프롬프트로 읽지 않도록 아래에 `###` 헤더를 두지 않았습니다. 4단계에서 AI로 만들지 말고 위 렌더 파일을 업로드하세요.
+> 아래 `###` 블록 본문은 app.py `parse_image_prompts()`가 다음 `###` 전까지 통째로 읽으므로 프롬프트 외 문장을 넣지 마세요(발행 절차 섹션을 이 위로 옮긴 이유).
+> 참고: 현재 app.py는 `MAX_IMAGE_SLOTS = 6`이라 {{IMAGE_5}}도 `replace_placeholders()`로 치환됩니다.
 
 ## 발행 절차 (수동)
 1. ohbhs.tistory.com/manage/newpost/ 접속
@@ -83,3 +80,17 @@
 6. 태그 10개 입력(하나씩 Enter)
 7. "완료" → "비공개" → "비공개 저장"
 8. 검수 시 `<!-- V# -->` 주석과 V3 문단(삭제 여부) 확인
+
+## 이미지 프롬프트
+
+### thumbnail.png
+로컬 렌더 사용 (limited-acceptance-thumbnail.png)
+
+### image_1.png
+Hands calmly sorting a pile of plain mail envelopes into neat small stacks on a wooden kitchen table, a warm cup of tea and a small potted plant nearby with soft sunlight falling across the table, accent color deep blue (#23507C), warm flat editorial illustration, soft grain texture, muted navy (#1F3A5F) and slate palette with one gentle accent color, soft paper background, rounded simple shapes, generous negative space, soft morning light, calm and hopeful mood, people shown only from behind or as hands or silhouettes, No text, no letters, no numbers, no logos, no flags, no recognizable faces
+
+### image_3.png
+A quiet, tidy entryway of an old family home seen from inside, a set of house keys resting untouched in a small dish on a wooden shelf, morning sunlight streaming in through a half-open front door, accent color deep blue (#23507C), warm flat editorial illustration, soft grain texture, muted navy (#1F3A5F) and slate palette with one gentle accent color, soft paper background, rounded simple shapes, generous negative space, soft morning light, calm and hopeful mood, people shown only from behind or as hands or silhouettes, No text, no letters, no numbers, no logos, no flags, no recognizable faces
+
+### image_5.png
+Seen from behind, a person sits relaxed by a sunny window holding a warm cup of tea, a neatly closed document folder on the table and a blank wall calendar with one square softly circled, accent color deep blue (#23507C), warm flat editorial illustration, soft grain texture, muted navy (#1F3A5F) and slate palette with one gentle accent color, soft paper background, rounded simple shapes, generous negative space, soft morning light, calm and hopeful mood, people shown only from behind or as hands or silhouettes, No text, no letters, no numbers, no logos, no flags, no recognizable faces
