@@ -203,6 +203,9 @@ def generate_content(client, topic: str, title: str, field: str, platform: str) 
     return result
 
 
+MAX_IMAGE_SLOTS = 6
+
+
 def parse_image_prompts(meta_md: str) -> dict:
     """Extract DALL-E prompts from meta.md content."""
     prompts = {}
@@ -217,16 +220,17 @@ def parse_image_prompts(meta_md: str) -> dict:
         if not prompt_text:
             continue
 
+        # Slots handled by the local renderer (or not yet filled) carry notes, not prompts
+        if any(note in prompt_text for note in ("로컬 렌더", "AI 생성 안 함", "visual-designer가 채움")):
+            continue
+
         if "thumbnail" in header:
             prompts["thumbnail.png"] = prompt_text
-        elif "image_1" in header or ("1" in header and ("png" in header or "섹션" in header or "section" in header)):
-            prompts["image_1.png"] = prompt_text
-        elif "image_2" in header or ("2" in header and ("png" in header or "섹션" in header or "section" in header)):
-            prompts["image_2.png"] = prompt_text
-        elif "image_3" in header or ("3" in header and ("png" in header or "섹션" in header or "section" in header)):
-            prompts["image_3.png"] = prompt_text
-        elif "image_4" in header or ("4" in header and ("png" in header or "섹션" in header or "section" in header)):
-            prompts["image_4.png"] = prompt_text
+            continue
+        for i in range(1, MAX_IMAGE_SLOTS + 1):
+            if f"image_{i}" in header or (str(i) in header and ("png" in header or "섹션" in header or "section" in header)):
+                prompts[f"image_{i}.png"] = prompt_text
+                break
 
     return prompts
 
@@ -283,7 +287,7 @@ def upload_to_supabase(image_bytes: bytes, path: str) -> str:
 
 def replace_placeholders(html: str, image_urls: dict) -> str:
     """Replace {{IMAGE_N}} placeholders with actual URLs."""
-    for i in range(1, 5):
+    for i in range(1, MAX_IMAGE_SLOTS + 1):
         placeholder = f"{{{{IMAGE_{i}}}}}"
         key = f"image_{i}.png"
         if key in image_urls:
@@ -454,16 +458,14 @@ elif st.session_state["step"] == 4:
                 oi_client = get_openai_client()
                 if oi_client:
                     images = {}
-                    image_names = ["thumbnail.png", "image_1.png", "image_2.png", "image_3.png", "image_4.png"]
+                    image_names = ["thumbnail.png"] + [f"image_{i}.png" for i in range(1, MAX_IMAGE_SLOTS + 1)]
 
                     progress = st.progress(0)
                     status = st.empty()
 
-                    for idx, name in enumerate(image_names):
-                        if name not in prompts:
-                            continue
-
-                        status.text(f"Generating {name}... ({idx+1}/{len(prompts)})")
+                    todo = [name for name in image_names if name in prompts]
+                    for idx, name in enumerate(todo):
+                        status.text(f"Generating {name}... ({idx+1}/{len(todo)})")
                         try:
                             img_bytes = generate_single_image(oi_client, prompts[name])
                             if img_bytes:
@@ -471,7 +473,7 @@ elif st.session_state["step"] == 4:
                         except Exception as e:
                             st.warning(f"{name} 생성 실패: {e}")
 
-                        progress.progress((idx + 1) / len(prompts))
+                        progress.progress((idx + 1) / len(todo))
 
                     status.text("Complete!")
                     st.session_state["images"] = images
