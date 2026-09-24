@@ -20,7 +20,7 @@
 | 제작 | `naver-writer` | 전환형 사례 Q&A 원고 |
 | 제작 | `tistory-writer` | 구글 SEO 종합 가이드 원고 |
 | 검수 | `compliance-reviewer` | 법리 정확성 + 변호사 광고규정 |
-| 발행 | `publisher` | 패키징·비공개 발행·색인·로그 |
+| 발행 | `publisher` | 패키징·비공개 발행·**색인 등록 요청·확인**·로그 |
 | 측정 | `performance-analyst` | 주간·월간 성과 리포트 |
 | 사후관리 | `content-refresher` | 리프레시·통합·내부링크·법 개정 대응 |
 
@@ -28,4 +28,4 @@
 1. **기준선 측정**: 네이버 블로그 통계·티스토리 통계·Search Console에서 최근 3개월 데이터를 내보내 `data/`에 넣기
 2. **추적 설정**: 상담 링크 UTM, 상담 접수 시 “어떻게 알고 오셨나요?” 질문 → `data/leads.csv`
 3. `/blog-plan` → 주제 승인 → `/blog-write <주제> both`
-4. 금요일 `/blog-report`, 월말 `/blog-refresh`
+4. 공개 전환 당일 `/blog-index`, 금요일 `/blog-report`, 월말 `/blog-refresh`

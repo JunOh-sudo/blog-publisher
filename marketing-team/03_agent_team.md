@@ -31,7 +31,7 @@
 | `naver-writer` | 제작 | 팩트시트 + 키워드 | 네이버 원고(MD/HTML) + 검수용 DOCX + 이미지 프롬프트 | `legal-blog-automation` 스킬 |
 | `tistory-writer` | 제작 | 팩트시트 + 키워드 | 티스토리 `post.html` + `meta.md` | `tistory-blog-automation` 스킬, `app.py` |
 | `compliance-reviewer` | 검수 | 원고 + 팩트시트 | 검수 리포트(🔴차단/🟡수정/🟢통과) + 수정본 | 변호사 광고규정 체크리스트 |
-| `publisher` | 발행 | 승인된 원고 | 비공개 발행 패키지, 발행 로그(`published_posts.csv`) | `app.py` 5단계, 색인 요청 체크리스트 |
+| `publisher` | 발행 | 승인된 원고 | 비공개 발행 패키지, **색인 등록 요청·확인**, 발행 로그(`published_posts.csv`) | `app.py` 5단계, `/blog-index` |
 | `performance-analyst` | 측정 | `data/*.csv` 통계 | 주간 리포트, 다음 주 제안 | Read/Bash(csv 집계) |
 | `content-refresher` | 사후관리 | 발행 로그 + 성과 + 법개정 | 리프레시 티켓, 내부링크 맵 | Grep, WebSearch |
 
@@ -42,7 +42,8 @@
 | 월 오전 | `/blog-plan` → 이번 주 3건 주제·키워드 확정 | topic-strategist | ✅ **주제 승인(5분)** |
 | 월~화 | `/blog-write <주제>` → 팩트시트 → 원고 → 컴플라이언스 검수 | researcher → writer → reviewer | |
 | 화~목 | 변호사 검수(DOCX/미리보기) → 비공개 발행 → 공개 전환 | publisher | ✅ **법리 최종 검수(글당 15~20분)** |
-| 발행 +1일 | 네이버 서치어드바이저·GSC 색인 요청, 발행 로그 기록 | publisher | |
+| 공개 당일 | `/blog-index` → Search Console·서치어드바이저·다음 색인 요청, 발행 로그 기록 | publisher | ✅ 콘솔 로그인·제출(2분) |
+| 발행 +3일·+7일 | 색인 확인 → +7일 미색인은 재요청 | publisher → content-refresher | |
 | 금 | `/blog-report` → 주간 성과 리포트 | performance-analyst | 👀 열람 |
 | 매월 말 | `/blog-refresh` → 리프레시 2~4건 + 내부링크 보강 | content-refresher | ✅ 승인 |
 
@@ -63,7 +64,22 @@
 - 🟡 네이버: 동일 키워드 과다 반복, 외부링크 과다, 타 플랫폼 글과 유사도
 - 🟢 광고책임변호사 표시, “법무법인 강호 오준성 변호사” 도입부, 상담 링크 정상
 
-## 5. 운영 모드 선택
+## 5. 색인 등록 담당: publisher (주) + content-refresher (보조)
+
+새 에이전트를 만들지 않고 `publisher`에 맡깁니다. 발행 URL을 가장 먼저 알고 발행 로그를 관리하므로 요청·기록·확인을 한곳에서 끝낼 수 있습니다.
+
+| 시점 | 담당 | 작업 |
+|---|---|---|
+| 최초 1회 | publisher | 티스토리 사이트맵·RSS를 Search Console·서치어드바이저·다음 웹마스터도구에 제출했는지 점검 |
+| 공개 당일 | publisher | 티스토리 글 URL 색인 요청(Google·네이버·다음, Bing 선택). 네이버 블로그는 자동 수집이라 요청 대신 확인만 |
+| +3일, +7일 | publisher | 검색 노출 확인 → `indexed_google/naver/daum` 기록 |
+| +7일 미색인 | content-refresher | 원인 점검(중복·유사도·얇은 본문) → 수정 → 재요청 |
+| 글 수정·갱신 후 | content-refresher | 재색인 요청 목록에 추가 |
+| 주간 | performance-analyst | 리포트에 색인율, 미색인 목록 포함 |
+
+콘솔 로그인과 제출 버튼은 사람이 누릅니다(글당 약 1~2분). 에이전트는 제출할 URL 목록과 경로를 준비하고 결과를 기록합니다.
+
+## 6. 운영 모드 선택
 
 | 모드 | 설명 | 추천 대상 |
 |---|---|---|
@@ -71,12 +87,13 @@
 | B. 자동 초안 | 주제 백로그에서 매일 초안만 자동 생성(Routine), 발행은 수동 | 원고 재고를 쌓고 싶을 때 |
 | C. 완전 자동 | 권장하지 않음 | 법률 광고 특성상 사람 검수 필수 |
 
-## 6. 시작 방법
+## 7. 시작 방법
 
 ```bash
 # 저장소 루트에서 Claude Code 실행 후
 /blog-plan                  # 이번 주 주제 3건 제안
 /blog-write 상속포기 기간     # 팩트시트 → 네이버/티스토리 원고 → 검수
+/blog-index                 # 공개된 글 색인 요청 목록 + 색인 확인
 /blog-report                # data/ 통계로 주간 리포트
 /blog-refresh               # 월간 리프레시·내부링크 점검
 ```
