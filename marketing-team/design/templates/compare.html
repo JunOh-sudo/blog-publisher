@@ -1,0 +1,13 @@
+<!-- 2열 비교표. data: pillar, tag, title, left, right, rows[{label, left, right}] 최대 5행 -->
+<div class="frame" id="f">
+  <span class="tag" id="tag"></span>
+  <h2 class="title" id="title" style="font-size:54px;margin:28px 0 36px"></h2>
+  <div id="tbl" style="display:grid;grid-template-columns:200px 1fr 1fr;border-radius:18px;overflow:hidden;border:2px solid var(--line);background:#fff;font-size:26px"></div>
+  <div class="foot"><span><b>법무법인 강호</b> 오준성 변호사</span><small>일반 정보이며 개별 사안은 상담이 필요합니다</small></div>
+</div>
+<script>
+const d=window.DATA;f.classList.add(d.pillar||"P1");tag.textContent=d.tag||"";title.textContent=d.title||"";
+const cell=(txt,st)=>{const e=document.createElement("div");e.textContent=txt;e.style.cssText="padding:22px 24px;border-bottom:2px solid var(--line);line-height:1.4;"+st;return e;};
+tbl.append(cell("",""),cell(d.left||"","background:var(--pc);color:#fff;font-weight:800;font-size:30px"),cell(d.right||"","background:var(--navy);color:#fff;font-weight:800;font-size:30px"));
+(d.rows||[]).slice(0,5).forEach(r=>tbl.append(cell(r.label,"font-weight:800;background:var(--pbg);color:var(--pc)"),cell(r.left,""),cell(r.right,"")));
+</script>

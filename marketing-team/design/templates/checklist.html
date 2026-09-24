@@ -1,0 +1,16 @@
+<!-- 번호 목록 카드(순서·개수가 의미 있는 목록). data: pillar, tag, title, items[{head, body}] 최대 5개, note -->
+<div class="frame" id="f">
+  <span class="tag" id="tag"></span>
+  <h2 class="title" id="title" style="font-size:54px;margin:28px 0 36px"></h2>
+  <ol id="list" style="list-style:none;display:flex;flex-direction:column;gap:18px"></ol>
+  <p id="note" style="margin-top:24px;font-size:24px;color:var(--ink-2)"></p>
+  <div class="foot"><span><b>법무법인 강호</b> 오준성 변호사</span><small>일반 정보이며 개별 사안은 상담이 필요합니다</small></div>
+</div>
+<script>
+const d=window.DATA;f.classList.add(d.pillar||"P1");tag.textContent=d.tag||"";title.textContent=d.title||"";note.textContent=d.note||"";
+const items=(d.items||[]).slice(0,5);
+list.innerHTML=items.map((it,i)=>`<li style="display:grid;grid-template-columns:64px 1fr;gap:24px;align-items:start;background:#fff;border:2px solid var(--line);border-radius:18px;padding:${items.length>4?18:24}px 28px">
+<span style="width:64px;height:64px;border-radius:50%;background:var(--pc);color:#fff;font-weight:800;font-size:32px;display:flex;align-items:center;justify-content:center">${i+1}</span>
+<div><div style="font-weight:800;font-size:32px;line-height:1.35"></div><div style="font-size:24px;color:var(--ink-2);line-height:1.45;margin-top:4px"></div></div></li>`).join("");
+[...list.children].forEach((li,i)=>{const t=li.querySelectorAll("div > div");t[0].textContent=items[i].head||"";t[1].textContent=items[i].body||"";});
+</script>

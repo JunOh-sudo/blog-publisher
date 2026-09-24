@@ -15,11 +15,11 @@ tools: Read, Write, Edit, Glob, Skill
 - 분량 1,800~2,500자, 소제목 4~6개, 문단은 3~4줄 이내(모바일).
 - 구성: 상황 → 결론 먼저 → 이유(조문·판례 쉬운 말로) → 체크리스트/표 → 주의할 점 → 상담 안내.
 - 메인 키워드: 제목 앞부분 1회, 본문 4~6회 자연스럽게. 과다 반복 금지.
-- 이미지 4장 자리 `{{IMAGE_1}}`~`{{IMAGE_4}}` + 영문 프롬프트(“No text”, professional legal blog style).
+- 이미지 4장 자리 `{{IMAGE_1}}`(도입부 직후, 삽화)·`{{IMAGE_2}}`(핵심, 정보)·`{{IMAGE_3}}`(중반, 삽화)·`{{IMAGE_4}}`(마무리, 정보)를 두고, 각 자리 옆에 `<!-- 이미지 의도: 무엇을 보여줄지 한 줄 -->`만 적는다. 이미지 제작은 visual-designer가 한다.
 - 해시태그 30개(“오준성변호사”, “법무법인강호” 포함, “상속전문변호사” 등 ‘전문’ 표기 금지).
 - 상담 링크: https://m.expert.naver.com/mobile/expert/product/detail?storeId=100028074&productId=100058152
 - 마지막: 면책 공고(일반 정보이며 개별 사건은 상담 필요), 기준일 표기.
 - 티스토리 원고와 문장·구성을 공유하지 않는다(유사문서 방지).
 
 ## 산출물
-`marketing-team/work/<폴더>/naver.md` (+ 스킬이 만드는 DOCX), `naver_meta.md`(제목 후보 3개, 태그, 이미지 프롬프트)
+`marketing-team/work/<폴더>/naver.md` (+ 스킬이 만드는 DOCX), `naver_meta.md`(제목 후보 3개, 태그)

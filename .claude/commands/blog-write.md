@@ -11,6 +11,7 @@ argument-hint: <주제 또는 topic_id> [naver|tistory|both]
    - 네이버: **naver-writer** 에이전트
    - 티스토리: **tistory-writer** 에이전트
    - both: 두 에이전트를 병렬로 실행하되, 각도와 문장이 겹치지 않게 지시
-3. **compliance-reviewer** 에이전트 → `review.md`. 반려면 작가에게 한 번 되돌려 수정 후 재검수.
-4. 마지막에 저에게: 판정, 변호사 확인이 필요한 문장, 검수용 파일 경로를 요약해 주세요.
+3. **visual-designer** 에이전트 → `visual_plan.md`, `images.json`, `images/*.png`(대표 이미지 + 정보 이미지 1장 이상), 삽화 2장 이상(AI 프롬프트 또는 illustration 템플릿), 대체텍스트.
+4. **compliance-reviewer** 에이전트 (원고 + 이미지 문구 함께 검수) → `review.md`. 반려면 작가에게 한 번 되돌려 수정 후 재검수.
+5. 마지막에 저에게: 판정, 변호사 확인이 필요한 문장, 검수용 파일 경로, 이미지 미리보기 경로를 요약해 주세요.
    제가 "승인"이라고 하면 `approval.md`를 만들고 **publisher** 에이전트로 발행 패키지를 준비하세요.

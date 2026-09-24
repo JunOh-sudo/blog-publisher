@@ -1,0 +1,16 @@
+/* 법무법인 강호 오준성 변호사 블로그 — 공통 비주얼 토큰 (05_brand_visual_guide.md와 동일) */
+:root{
+  --navy:#1F3A5F; --ink:#18212D; --ink-2:#48525F; --paper:#F5F6F8; --line:#D9DEE5; --white:#FFFFFF;
+  --p1:#23507C; --p1-bg:#E1EAF4; --p2:#7A4A86; --p2-bg:#F0E7F2; --p3:#2F6B52; --p3-bg:#E2EFE8; --p4:#8A5A14; --p4-bg:#F5ECDC;
+  --bad:#A3302A; --bad-bg:#F8E5E3;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1080px;overflow:hidden}
+body{font-family:"Noto Sans KR",sans-serif;color:var(--ink);background:var(--paper);word-break:keep-all;-webkit-font-smoothing:antialiased}
+.frame{position:relative;width:1080px;height:1080px;padding:84px 88px 0;display:flex;flex-direction:column}
+.tag{align-self:flex-start;font-weight:800;font-size:28px;letter-spacing:.02em;padding:8px 22px;border-radius:999px;color:var(--pc);background:var(--pbg)}
+.title{font-family:"Noto Serif KR",serif;font-weight:700;color:var(--ink);line-height:1.28;letter-spacing:-.01em}
+.foot{position:absolute;left:0;right:0;bottom:0;height:104px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 88px;font-size:28px;font-weight:500}
+.foot b{font-weight:800}
+.foot small{font-size:22px;opacity:.75}
+.P1{--pc:var(--p1);--pbg:var(--p1-bg)} .P2{--pc:var(--p2);--pbg:var(--p2-bg)} .P3{--pc:var(--p3);--pbg:var(--p3-bg)} .P4{--pc:var(--p4);--pbg:var(--p4-bg)}

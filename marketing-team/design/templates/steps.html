@@ -1,0 +1,14 @@
+<!-- 절차 흐름(실제 순서가 있는 절차에만). data: pillar, tag, title, steps[{head, body}] 최대 5단계 -->
+<div class="frame" id="f">
+  <span class="tag" id="tag"></span>
+  <h2 class="title" id="title" style="font-size:54px;margin:28px 0 40px"></h2>
+  <div id="steps" style="display:flex;flex-direction:column"></div>
+  <div class="foot"><span><b>법무법인 강호</b> 오준성 변호사</span><small>일반 정보이며 개별 사안은 상담이 필요합니다</small></div>
+</div>
+<script>
+const d=window.DATA;f.classList.add(d.pillar||"P1");tag.textContent=d.tag||"";title.textContent=d.title||"";
+const s=(d.steps||[]).slice(0,5);
+s.forEach((st,i)=>{const row=document.createElement("div");row.style.cssText="display:grid;grid-template-columns:80px 1fr;gap:28px";
+row.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center"><span style="width:64px;height:64px;border-radius:14px;background:var(--pc);color:#fff;font-weight:800;font-size:30px;display:flex;align-items:center;justify-content:center">${i+1}</span>${i<s.length-1?'<span style="flex:1;width:4px;background:var(--line);margin:6px 0"></span>':''}</div><div style="padding:8px 0 ${i<s.length-1?28:0}px"><div class="h" style="font-weight:800;font-size:32px"></div><div class="b" style="font-size:24px;color:var(--ink-2);line-height:1.45;margin-top:6px"></div></div>`;
+row.querySelector(".h").textContent=st.head||"";row.querySelector(".b").textContent=st.body||"";steps.append(row);});
+</script>

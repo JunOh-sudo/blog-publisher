@@ -1,0 +1,108 @@
+{
+ "_note": "렌더러 동작 확인용 예시. 문구는 법리 검수 전 가안입니다.",
+ "images": [
+  {
+   "template": "thumbnail",
+   "file": "sample_thumbnail.png",
+   "data": {
+    "pillar": "P3",
+    "tag": "개인회생",
+    "title": "개인회생 신청 전\n반드시 멈춰야 할\n행동 5가지",
+    "subtitle": "신청 준비 중이라면 지금 확인하세요",
+    "date": "2026.09"
+   }
+  },
+  {
+   "template": "checklist",
+   "file": "sample_checklist.png",
+   "data": {
+    "pillar": "P3",
+    "tag": "체크리스트",
+    "title": "신청 전에 멈춰야 할 행동",
+    "items": [
+     {
+      "head": "특정 채권자에게만 먼저 갚기",
+      "body": "가족·지인에게 먼저 갚는 것도 포함됩니다"
+     },
+     {
+      "head": "재산 명의 이전·헐값 처분",
+      "body": "차, 보증금, 부동산 정리는 상담 후에"
+     },
+     {
+      "head": "설명하기 어려운 큰 현금 인출",
+      "body": "사용처를 증빙할 수 있게 남겨 두세요"
+     },
+     {
+      "head": "새 대출·돌려막기",
+      "body": "신청 직전의 새 채무는 설명이 필요합니다"
+     },
+     {
+      "head": "새 투자·도박",
+      "body": "주식·코인 신규 투자도 멈추세요"
+     }
+    ],
+    "note": "※ 예시 문구 · 변호사 검수 전"
+   }
+  },
+  {
+   "template": "compare",
+   "file": "sample_compare.png",
+   "data": {
+    "pillar": "P3",
+    "tag": "비교",
+    "title": "개인회생과 개인파산, 무엇이 다른가요",
+    "left": "개인회생",
+    "right": "개인파산",
+    "rows": [
+     {
+      "label": "대상",
+      "left": "계속 소득이 있는 분",
+      "right": "갚을 능력이 없는 분"
+     },
+     {
+      "label": "재산",
+      "left": "원칙적으로 유지",
+      "right": "환가해 배당"
+     },
+     {
+      "label": "진행",
+      "left": "변제계획대로 갚기",
+      "right": "면책 심리"
+     }
+    ]
+   }
+  },
+  {
+   "template": "illustration",
+   "file": "sample_illustration_desk.png",
+   "data": {
+    "pillar": "P3",
+    "scene": "desk"
+   }
+  },
+  {
+   "template": "illustration",
+   "file": "sample_illustration_home.png",
+   "data": {
+    "pillar": "P1",
+    "scene": "home"
+   }
+  },
+  {
+   "template": "illustration",
+   "file": "sample_illustration_path.png",
+   "data": {
+    "pillar": "P2",
+    "scene": "path"
+   }
+  },
+  {
+   "template": "illustration",
+   "file": "sample_illustration_calm.png",
+   "data": {
+    "pillar": "P4",
+    "scene": "calm"
+   }
+  }
+ ]
+}

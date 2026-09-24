@@ -17,10 +17,13 @@
    └────────────────┘ ├────────────────┤ ├────────────────┤ ├────────────────────┤
                       │naver-writer    │ │publisher       │ │content-refresher   │
                       │tistory-writer  │ │ 패키징·발행체크   │ │ 리프레시·내부링크·법개정│
-                      └────────────────┘ └────────────────┘ └────────────────────┘
+                      ├────────────────┤ └────────────────┘ └────────────────────┘
+                      │visual-designer │
+                      │ 썸네일·정보이미지  │
+                      └────────────────┘
 ```
 
-에이전트 정의 파일: `.claude/agents/*.md` (Claude Code가 자동 인식)
+에이전트 정의 파일(9명): `.claude/agents/*.md` (Claude Code가 자동 인식)
 
 ## 2. 역할 정의
 
@@ -30,6 +33,7 @@
 | `legal-researcher` | 제작 | 확정 주제 | `factsheet.md` (조문·판례·기준액, 출처·확인일) | WebSearch/WebFetch(law.go.kr, 대법원 종합법률정보) |
 | `naver-writer` | 제작 | 팩트시트 + 키워드 | 네이버 원고(MD/HTML) + 검수용 DOCX + 이미지 프롬프트 | `legal-blog-automation` 스킬 |
 | `tistory-writer` | 제작 | 팩트시트 + 키워드 | 티스토리 `post.html` + `meta.md` | `tistory-blog-automation` 스킬, `app.py` |
+| `visual-designer` | 제작 | 원고 초안 + 팩트시트 | 대표 이미지, 정보 이미지(체크리스트·비교·절차), AI 이미지 프롬프트, 대체텍스트 | `design/render.py`, `05_brand_visual_guide.md` |
 | `compliance-reviewer` | 검수 | 원고 + 팩트시트 | 검수 리포트(🔴차단/🟡수정/🟢통과) + 수정본 | 변호사 광고규정 체크리스트 |
 | `publisher` | 발행 | 승인된 원고 | 비공개 발행 패키지, **색인 등록 요청·확인**, 발행 로그(`published_posts.csv`) | `app.py` 5단계, `/blog-index` |
 | `performance-analyst` | 측정 | `data/*.csv` 통계 | 주간 리포트, 다음 주 제안 | Read/Bash(csv 집계) |
@@ -40,7 +44,7 @@
 | 요일 | 단계 | 담당 | 사람 개입 |
 |---|---|---|---|
 | 월 오전 | `/blog-plan` → 이번 주 3건 주제·키워드 확정 | topic-strategist | ✅ **주제 승인(5분)** |
-| 월~화 | `/blog-write <주제>` → 팩트시트 → 원고 → 컴플라이언스 검수 | researcher → writer → reviewer | |
+| 월~화 | `/blog-write <주제>` → 팩트시트 → 원고 → 이미지 → 컴플라이언스 검수 | researcher → writer → designer → reviewer | |
 | 화~목 | 변호사 검수(DOCX/미리보기) → 비공개 발행 → 공개 전환 | publisher | ✅ **법리 최종 검수(글당 15~20분)** |
 | 공개 당일 | `/blog-index` → Search Console·서치어드바이저·다음 색인 요청, 발행 로그 기록 | publisher | ✅ 콘솔 로그인·제출(2분) |
 | 발행 +3일·+7일 | 색인 확인 → +7일 미색인은 재요청 | publisher → content-refresher | |

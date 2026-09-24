@@ -6,12 +6,13 @@
 | [02_content_strategy.md](02_content_strategy.md) | 포지셔닝, 4개 콘텐츠 기둥, 플랫폼 역할, 주제 채점, **12주 캘린더**, 리프레시 우선순위 |
 | [03_agent_team.md](03_agent_team.md) | **에이전트 팀 구성**, 주간 워크플로우, 품질 게이트, 광고규정 체크리스트 |
 | [04_kpi_and_aftercare.md](04_kpi_and_aftercare.md) | KPI 트리, 데이터 수집, 리포트 주기, 사후관리 규칙 |
+| [05_brand_visual_guide.md](05_brand_visual_guide.md) | 색상·글꼴·이미지 규격, AI 이미지 스타일, 정보 이미지 렌더러 사용법 |
 | [topic_backlog.csv](topic_backlog.csv) | 채점된 주제 42개 (캘린더 36 + 백로그 6) |
 | `data/` | 발행 로그·통계·순위·상담 CSV 템플릿 |
 | `reports/` | 주간·월간 리포트 (performance-analyst 생성) |
 | `work/` | 글별 작업 폴더 (팩트시트·원고·검수) |
 
-## 에이전트 팀 (8명 + 변호사)
+## 에이전트 팀 (9명 + 변호사)
 
 | 단계 | 에이전트 | 한 줄 역할 |
 |---|---|---|
@@ -19,6 +20,7 @@
 | 제작 | `legal-researcher` | 출처 달린 법령·판례 팩트시트 |
 | 제작 | `naver-writer` | 전환형 사례 Q&A 원고 |
 | 제작 | `tistory-writer` | 구글 SEO 종합 가이드 원고 |
+| 제작 | `visual-designer` | 대표 이미지·정보 이미지·대체텍스트 |
 | 검수 | `compliance-reviewer` | 법리 정확성 + 변호사 광고규정 |
 | 발행 | `publisher` | 패키징·비공개 발행·**색인 등록 요청·확인**·로그 |
 | 측정 | `performance-analyst` | 주간·월간 성과 리포트 |

@@ -14,6 +14,7 @@ tools: Read, Write, Edit, Glob, Skill
 - "최종 업데이트: YYYY.MM.DD" 표기.
 - 태그 10개("오준성변호사", "법무법인강호" 필수, ‘전문’ 표기 금지), 해시태그 없음.
 - 상담 링크: https://m.expert.naver.com/mobile/expert/product/detail?storeId=100028074&productId=100149275
+- 이미지 자리는 `{{IMAGE_1}}` 도입부 직후(삽화), `{{IMAGE_2}}` 핵심(정보), `{{IMAGE_3}}` 중반(삽화), `{{IMAGE_4}}` 마무리(정보) 순서로 두고, 각 자리 옆에 `<!-- 이미지 의도: ... -->`만 적고, 이미지 프롬프트·제작은 visual-designer에게 맡긴다(meta.md의 이미지 프롬프트 칸은 visual-designer가 채운다).
 - 면책 공고 포함. 팝업 상담 유도창은 app.py 기본 규칙을 따른다.
 
 ## 산출물

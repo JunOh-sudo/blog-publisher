@@ -1,0 +1,15 @@
+<!-- 대표 이미지. data: pillar(P1~P4), tag, title(줄바꿈 \n), subtitle -->
+<div class="frame" id="f">
+  <span class="tag" id="tag"></span>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:36px;padding-bottom:150px">
+    <div style="width:96px;height:8px;background:var(--pc)"></div>
+    <h1 class="title" id="title" style="font-size:84px"></h1>
+    <p id="sub" style="font-size:38px;color:var(--ink-2);font-weight:500;line-height:1.45"></p>
+  </div>
+  <div class="foot"><span><b>법무법인 강호</b> 오준성 변호사</span><small id="date"></small></div>
+</div>
+<script>
+const d=window.DATA;f.classList.add(d.pillar||"P1");tag.textContent=d.tag||"";
+title.innerHTML=(d.title||"").split("\n").map(s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))).join("<br>");
+sub.textContent=d.subtitle||"";date.textContent=d.date||"";
+</script>
