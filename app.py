@@ -17,6 +17,8 @@ import io
 import zipfile
 from datetime import datetime, date
 
+import video_maker
+
 # ============================================================
 # Page Config
 # ============================================================
@@ -363,6 +365,24 @@ if st.session_state["step"] == 1:
                 else:
                     st.error("제목 생성에 실패했습니다. 다시 시도해주세요.")
 
+    st.divider()
+    with st.expander("🎬 이미 발행한 블로그 글로 유튜브 영상 만들기"):
+        up_html = st.file_uploader("post.html 업로드", type=["html", "htm"], key="video_html_upload")
+        up_imgs = st.file_uploader(
+            "블로그 이미지 (선택, thumbnail.png / image_1.png ~ image_4.png)",
+            type=["png", "jpg", "jpeg"], accept_multiple_files=True, key="video_img_upload",
+        )
+        up_title = st.text_input("글 제목", key="video_title_input")
+        if st.button("🎬 영상 만들기로 이동", disabled=not up_html):
+            st.session_state["content"] = {
+                "post_html": up_html.getvalue().decode("utf-8", errors="ignore"),
+                "meta_md": "",
+            }
+            st.session_state["images"] = {f.name: f.getvalue() for f in (up_imgs or [])}
+            st.session_state["selected_title"] = up_title or "법률 해설"
+            st.session_state["step"] = 6
+            st.rerun()
+
 # ============================================================
 # Step 2: Title Selection
 # ============================================================
@@ -611,9 +631,126 @@ Supabase 업로드 경로는 blog-images/{date_str}/ 로 사용해줘."""
 
     st.divider()
 
+    if st.button("🎬 이 글로 유튜브 영상 만들기", type="primary"):
+        st.session_state["step"] = 6
+        st.rerun()
+
     # Reset
-    if st.button("🔄 새 글 작성", type="primary"):
-        for key in ["titles", "selected_title", "content", "images", "image_urls", "step"]:
+    if st.button("🔄 새 글 작성"):
+        for key in ["titles", "selected_title", "content", "images", "image_urls", "step",
+                    "video_script", "video_result"]:
+            st.session_state[key] = None
+        st.session_state["step"] = 1
+        st.rerun()
+
+# ============================================================
+# Step 6: YouTube Video (내레이션 + 큰 자막)
+# ============================================================
+elif st.session_state["step"] == 6:
+    st.header("🎬 유튜브 영상 만들기")
+    st.caption("블로그 글 → 내레이션 대본 → AI 음성 → 큰 자막 영상(mp4) + 자막파일(srt)")
+
+    content = st.session_state.get("content") or {}
+    images = st.session_state.get("images") or {}
+    title = st.session_state.get("selected_title") or "법률 해설"
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        fmt_label = st.radio("영상 형식", ["일반 영상 (16:9, 4~6분)", "쇼츠 (9:16, 1분 이내)"])
+        fmt = "landscape" if fmt_label.startswith("일반") else "shorts"
+    with col2:
+        voice = st.selectbox(
+            "내레이션 목소리", video_maker.TTS_VOICES, index=0,
+            help="onyx·echo·ash: 남성 저음 / nova·shimmer·coral: 여성",
+        )
+    with col3:
+        st.metric("사용 가능한 블로그 이미지", f"{len(images)}장")
+
+    style_notes = st.text_area(
+        "채널 스타일 메모 (선택)",
+        value=st.session_state.get("video_style_notes", ""),
+        placeholder="예: 첫 마디는 질문으로 시작, 존댓말 '~습니다' 체, 의뢰인 사례 하나 넣기, 마지막에 무료상담 안내",
+        height=80,
+    )
+    st.session_state["video_style_notes"] = style_notes
+
+    # 1) 대본
+    if st.button("📝 영상 대본 생성", disabled=not content.get("post_html")):
+        client = get_claude_client()
+        if client:
+            with st.spinner("블로그 글을 영상 대본으로 바꾸는 중..."):
+                try:
+                    st.session_state["video_script"] = video_maker.generate_video_script(
+                        client, content["post_html"], title, fmt, style_notes
+                    )
+                    st.session_state["video_script_fmt"] = fmt
+                    st.session_state["video_result"] = None
+                except Exception as e:
+                    st.error(f"대본 생성 실패: {e}")
+
+    script = st.session_state.get("video_script")
+    if script:
+        st.subheader("대본 검수")
+        st.caption("내레이션을 직접 고친 뒤 영상을 만들 수 있습니다. 법리 표현은 반드시 확인하세요.")
+        for i, sc in enumerate(script["scenes"]):
+            with st.expander(f"장면 {i + 1}. {sc.get('heading', '')}", expanded=(i == 0)):
+                sc["heading"] = st.text_input("화면 제목", sc.get("heading", ""), key=f"vh_{i}")
+                sc["narration"] = st.text_area("내레이션", sc["narration"], key=f"vn_{i}", height=120)
+                opts = [""] + list(images.keys())
+                cur = sc.get("image", "")
+                sc["image"] = st.selectbox(
+                    "배경 이미지", opts, index=opts.index(cur) if cur in opts else 0,
+                    key=f"vi_{i}", format_func=lambda x: x or "(기본 배경)",
+                )
+        total_chars = sum(len(s["narration"]) for s in script["scenes"])
+        st.info(f"예상 길이: 약 {total_chars / 6.5 / 60:.1f}분 ({total_chars:,}자)")
+
+        # 2) 영상 렌더링
+        if st.button("🎬 영상 만들기 (내레이션 + 자막)", type="primary"):
+            oi_client = get_openai_client()
+            if oi_client:
+                bar = st.progress(0.0)
+                status = st.empty()
+
+                def _progress(frac, msg):
+                    bar.progress(min(frac, 1.0))
+                    status.text(msg)
+
+                try:
+                    st.session_state["video_result"] = video_maker.build_video(
+                        script, oi_client, images,
+                        fmt=st.session_state.get("video_script_fmt", fmt),
+                        voice=voice, progress=_progress,
+                    )
+                except Exception as e:
+                    st.error(f"영상 생성 실패: {e}")
+
+    result = st.session_state.get("video_result")
+    if result:
+        st.success(f"✅ 영상 완성 ({result['duration'] / 60:.1f}분)")
+        with open(result["video"], "rb") as f:
+            video_bytes = f.read()
+        st.video(video_bytes)
+
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            st.download_button("🎬 video.mp4", video_bytes, f"{date_str}-video.mp4", "video/mp4")
+        with c2:
+            with open(result["srt"], "rb") as f:
+                st.download_button("💬 subtitles.srt", f.read(), f"{date_str}-subtitles.srt", "text/plain")
+        with c3:
+            st.download_button(
+                "📋 youtube.txt", video_maker.youtube_meta_text(script),
+                f"{date_str}-youtube.txt", "text/plain",
+            )
+        with st.expander("유튜브 업로드 정보 (제목·설명·태그)"):
+            st.code(video_maker.youtube_meta_text(script), language=None)
+        st.caption("자막은 영상에 이미 크게 새겨져 있습니다. srt는 유튜브 '자막' 메뉴에 올리면 검색 노출에 도움이 됩니다.")
+
+    st.divider()
+    if st.button("⬅️ 처음으로"):
+        for key in ["titles", "selected_title", "content", "images", "image_urls",
+                    "video_script", "video_result"]:
             st.session_state[key] = None
         st.session_state["step"] = 1
         st.rerun()
